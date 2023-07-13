@@ -12,41 +12,41 @@ import store from '@/store'; // NEW
 const routes = [
   {
     path: '/',
-    name: "Home",
+    name: "HomeView",
     component: HomeView,
   },
   {
     path: '/register',
-    name: 'Register',
+    name: 'RegisterView',
     component: RegisterView,
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'LoginView',
     component: LoginView,
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'DashboardView',
     component: DashboardView,
     meta: { requiresAuth: true },
   },
   {
     path: '/profile',
-    name: 'Profile',
+    name: 'ProfileView',
     component: ProfileView,
     meta: { requiresAuth: true },
   },
   {
     path: '/note/:id',
-    name: 'Note',
+    name: 'NoteView',
     component: NoteView,
     meta: { requiresAuth: true },
     props: true,
   },
   {
     path: '/editnote/:id',
-    name: 'EditNote',
+    name: 'EditNoteView',
     component: EditNoteView,
     meta: { requiresAuth: true },
     props: true,
