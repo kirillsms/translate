@@ -1,4 +1,8 @@
 <template>
+  <!-- <div>
+    <p>notes = {{ notes }}</p>
+    <p>form = {{ form }}</p>
+  </div> -->
   <div>
     <section>
       <h1>Add new note</h1>
@@ -48,6 +52,11 @@
     </section>
   </div>
 </template>
+
+<!-- <script setup>
+import { ref } from 'vue';
+const form = ref();
+</script> -->
 
 <script>
 import { defineComponent } from 'vue';
