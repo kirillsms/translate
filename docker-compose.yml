@@ -22,6 +22,8 @@ services:
       - '/app/node_modules'
     ports:
       - 8080:8080
+      - 5173:5173
+      - 5174:5174
 
   db:
     image: postgres:15.1

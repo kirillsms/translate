@@ -11,4 +11,4 @@ COPY package-lock.json .
 RUN npm install
 RUN npm install --save chart.js@3.3.2 primeflex@3.1.2 primeicons@5.0.0 primevue@3.12.2 prismjs@1.9.0 sass-loader
 
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "dev"]
