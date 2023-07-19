@@ -3,14 +3,15 @@ import { onMounted, reactive, ref, watch } from 'vue';
 import ProductService from '@/service/ProductService';
 import { useLayout } from '@/layout/composables/layout';
 
-const { isDarkTheme, contextPath } = useLayout();
+// const { isDarkTheme, contextPath } = useLayout();
+const { isDarkTheme } = useLayout();
 
 const products = ref(null);
 const lineData = reactive({
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
     datasets: [
         {
-            label: 'First Dataset',
+            label: 'Возвратов',
             data: [65, 59, 80, 81, 56, 55, 40],
             fill: false,
             backgroundColor: '#2f4860',
@@ -18,7 +19,7 @@ const lineData = reactive({
             tension: 0.4
         },
         {
-            label: 'Second Dataset',
+            label: 'Переводов',
             data: [28, 48, 40, 19, 86, 27, 90],
             fill: false,
             backgroundColor: '#00bb7e',
@@ -39,7 +40,7 @@ onMounted(() => {
 });
 
 const formatCurrency = (value) => {
-    return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    return value.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB' });
 };
 const applyLightTheme = () => {
     lineOptions.value = {
@@ -120,65 +121,65 @@ watch(
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Orders</span>
+                        <span class="block text-500 font-medium mb-3">Заказов</span>
                         <div class="text-900 font-medium text-xl">152</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width: 2.5rem; height: 2.5rem">
                         <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">24 new </span>
-                <span class="text-500">since last visit</span>
+                <span class="text-green-500 font-medium">24 новых </span>
+                <span class="text-500">с прошлого визита</span>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Revenue</span>
-                        <div class="text-900 font-medium text-xl">$2.100</div>
+                        <span class="block text-500 font-medium mb-3">Вознаграждение</span>
+                        <div class="text-900 font-medium text-xl">{{ formatCurrency(235700) }}</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width: 2.5rem; height: 2.5rem">
                         <i class="pi pi-map-marker text-orange-500 text-xl"></i>
                     </div>
                 </div>
                 <span class="text-green-500 font-medium">%52+ </span>
-                <span class="text-500">since last week</span>
+                <span class="text-500">с прошлого месяца</span>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Customers</span>
-                        <div class="text-900 font-medium text-xl">28441</div>
+                        <span class="block text-500 font-medium mb-3">Граждан</span>
+                        <div class="text-900 font-medium text-xl">2841</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width: 2.5rem; height: 2.5rem">
                         <i class="pi pi-inbox text-cyan-500 text-xl"></i>
                     </div>
                 </div>
                 <span class="text-green-500 font-medium">520 </span>
-                <span class="text-500">newly registered</span>
+                <span class="text-500">новых обращений</span>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Comments</span>
-                        <div class="text-900 font-medium text-xl">152 Unread</div>
+                        <span class="block text-500 font-medium mb-3">Комментарии</span>
+                        <div class="text-900 font-medium text-xl">152 не прочитано</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width: 2.5rem; height: 2.5rem">
                         <i class="pi pi-comment text-purple-500 text-xl"></i>
                     </div>
                 </div>
                 <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
+                <span class="text-500">отвечено</span>
             </div>
         </div>
 
         <div class="col-12 xl:col-6">
-            <div class="card">
+            <!-- <div class="card">
                 <h5>Recent Sales</h5>
                 <DataTable :value="products" :rows="5" :paginator="true" responsiveLayout="scroll">
                     <Column style="width: 15%">
@@ -200,10 +201,10 @@ watch(
                         </template>
                     </Column>
                 </DataTable>
-            </div>
+            </div> -->
             <div class="card">
                 <div class="flex justify-content-between align-items-center mb-5">
-                    <h5>Best Selling Products</h5>
+                    <h5>Рейтинг переводов</h5>
                     <div>
                         <Button icon="pi pi-ellipsis-v" class="p-button-text p-button-plain p-button-rounded" @click="$refs.menu2.toggle($event)"></Button>
                         <Menu ref="menu2" :popup="true" :model="items"></Menu>
@@ -212,8 +213,8 @@ watch(
                 <ul class="list-none p-0 m-0">
                     <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div>
-                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Space T-Shirt</span>
-                            <div class="mt-1 text-600">Clothing</div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Патенты</span>
+                            <div class="mt-1 text-600">Узбекский</div>
                         </div>
                         <div class="mt-2 md:mt-0 flex align-items-center">
                             <div class="surface-300 border-round overflow-hidden w-10rem lg:w-6rem" style="height: 8px">
@@ -224,8 +225,8 @@ watch(
                     </li>
                     <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div>
-                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Portal Sticker</span>
-                            <div class="mt-1 text-600">Accessories</div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Мигучёт</span>
+                            <div class="mt-1 text-600">Киргизский</div>
                         </div>
                         <div class="mt-2 md:mt-0 ml-0 md:ml-8 flex align-items-center">
                             <div class="surface-300 border-round overflow-hidden w-10rem lg:w-6rem" style="height: 8px">
@@ -236,8 +237,8 @@ watch(
                     </li>
                     <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div>
-                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Supernova Sticker</span>
-                            <div class="mt-1 text-600">Accessories</div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">РВП</span>
+                            <div class="mt-1 text-600">Таджикский</div>
                         </div>
                         <div class="mt-2 md:mt-0 ml-0 md:ml-8 flex align-items-center">
                             <div class="surface-300 border-round overflow-hidden w-10rem lg:w-6rem" style="height: 8px">
@@ -248,8 +249,8 @@ watch(
                     </li>
                     <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div>
-                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Wonders Notebook</span>
-                            <div class="mt-1 text-600">Office</div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">ВНЖ</span>
+                            <div class="mt-1 text-600">Армянский</div>
                         </div>
                         <div class="mt-2 md:mt-0 ml-0 md:ml-8 flex align-items-center">
                             <div class="surface-300 border-round overflow-hidden w-10rem lg:w-6rem" style="height: 8px">
@@ -260,8 +261,8 @@ watch(
                     </li>
                     <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div>
-                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Mat Black Case</span>
-                            <div class="mt-1 text-600">Accessories</div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Гражданство</span>
+                            <div class="mt-1 text-600">Украинский</div>
                         </div>
                         <div class="mt-2 md:mt-0 ml-0 md:ml-8 flex align-items-center">
                             <div class="surface-300 border-round overflow-hidden w-10rem lg:w-6rem" style="height: 8px">
@@ -272,8 +273,8 @@ watch(
                     </li>
                     <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div>
-                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Robots T-Shirt</span>
-                            <div class="mt-1 text-600">Clothing</div>
+                            <span class="text-900 font-medium mr-2 mb-1 md:mb-0">Визы</span>
+                            <div class="mt-1 text-600">Китайский</div>
                         </div>
                         <div class="mt-2 md:mt-0 ml-0 md:ml-8 flex align-items-center">
                             <div class="surface-300 border-round overflow-hidden w-10rem lg:w-6rem" style="height: 8px">
@@ -287,10 +288,10 @@ watch(
         </div>
         <div class="col-12 xl:col-6">
             <div class="card">
-                <h5>Sales Overview</h5>
+                <h5>Статистика переводов</h5>
                 <Chart type="line" :data="lineData" :options="lineOptions" />
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="flex align-items-center justify-content-between mb-4">
                     <h5>Notifications</h5>
                     <div>
@@ -339,8 +340,8 @@ watch(
                         </span>
                     </li>
                 </ul>
-            </div>
-            <div
+            </div> -->
+            <!-- <div
                 class="px-4 py-5 shadow-2 flex flex-column md:flex-row md:align-items-center justify-content-between mb-3"
                 style="border-radius: 1rem; background: linear-gradient(0deg, rgba(0, 123, 255, 0.5), rgba(0, 123, 255, 0.5)), linear-gradient(92.54deg, #1c80cf 47.88%, #ffffff 100.01%)"
             >
@@ -351,7 +352,7 @@ watch(
                 <div class="mt-4 mr-auto md:mt-0 md:mr-0">
                     <a href="https://www.primefaces.org/primeblocks-vue" class="p-button font-bold px-5 py-3 p-button-warning p-button-rounded p-button-raised"> Get Started </a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

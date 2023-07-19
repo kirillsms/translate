@@ -1,13 +1,13 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
 
 const { layoutConfig, onMenuToggle, contextPath } = useLayout();
 
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
-const router = useRouter();
+// const router = useRouter();
 
 onMounted(() => {
     bindOutsideClickListener();
@@ -24,10 +24,10 @@ const logoUrl = computed(() => {
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
 };
-const onSettingsClick = () => {
-    topbarMenuActive.value = false;
-    router.push('/documentation');
-};
+// const onSettingsClick = () => {
+//     topbarMenuActive.value = false;
+//     router.push('/documentation');
+// };
 const topbarMenuClasses = computed(() => {
     return {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
@@ -60,11 +60,30 @@ const isOutsideClicked = (event) => {
 };
 </script>
 
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'NavBar',
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isAuthenticated;
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$store.dispatch('logOut');
+      this.$router.push('/auth/login');
+    }
+  },
+});
+</script>
+
 <template>
     <div class="layout-topbar">
         <router-link to="/" class="layout-topbar-logo">
             <img :src="logoUrl" alt="logo" />
-            <span>SAKAI</span>
+            <span>ПВС.ПЕРЕВОДЫ</span>
         </router-link>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
@@ -78,16 +97,16 @@ const isOutsideClicked = (event) => {
         <div class="layout-topbar-menu" :class="topbarMenuClasses">
             <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
                 <i class="pi pi-calendar"></i>
-                <span>Calendar</span>
+                <span>Календарь</span>
             </button>
             <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
                 <i class="pi pi-user"></i>
-                <span>Profile</span>
+                <a class="nav-link" @click="logout"><span>Выход</span></a>
             </button>
-            <button @click="onSettingsClick()" class="p-link layout-topbar-button">
+            <!-- <button @click="onSettingsClick()" class="p-link layout-topbar-button">
                 <i class="pi pi-cog"></i>
                 <span>Settings</span>
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
