@@ -13,10 +13,10 @@ const customer3 = ref(null);
 const filters1 = ref(null);
 const loading1 = ref(null);
 const loading2 = ref(null);
-const idFrozen = ref(false);
+// const idFrozen = ref(false);
 const products = ref(null);
-const expandedRows = ref([]);
-const statuses = ref(['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal']);
+// const expandedRows = ref([]);
+const statuses = ref(['возврат', 'завершено', 'новый', 'согласование', 'пересдача', 'перевод']);
 const representatives = ref([
     { name: 'Amy Elsner', image: 'amyelsner.png' },
     { name: 'Anna Fali', image: 'annafali.png' },
@@ -64,14 +64,14 @@ const initFilters1 = () => {
 const clearFilter1 = () => {
     initFilters1();
 };
-const expandAll = () => {
-    expandedRows.value = products.value.filter((p) => p.id);
-};
-const collapseAll = () => {
-    expandedRows.value = null;
-};
+// const expandAll = () => {
+//     expandedRows.value = products.value.filter((p) => p.id);
+// };
+// const collapseAll = () => {
+//     expandedRows.value = null;
+// };
 const formatCurrency = (value) => {
-    return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    return value.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB' });
 };
 
 const formatDate = (value) => {
@@ -81,30 +81,30 @@ const formatDate = (value) => {
         year: 'numeric'
     });
 };
-const calculateCustomerTotal = (name) => {
-    let total = 0;
-    if (customer3.value) {
-        for (let customer of customer3.value) {
-            if (customer.representative.name === name) {
-                total++;
-            }
-        }
-    }
+// const calculateCustomerTotal = (name) => {
+//     let total = 0;
+//     if (customer3.value) {
+//         for (let customer of customer3.value) {
+//             if (customer.representative.name === name) {
+//                 total++;
+//             }
+//         }
+//     }
 
-    return total;
-};
+//     return total;
+// };
 </script>
 
 <template>
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <h5>Filter Menu</h5>
+                <h5>Список задач</h5>
                 <DataTable
                     :value="customer1"
                     :paginator="true"
                     class="p-datatable-gridlines"
-                    :rows="10"
+                    :rows="8"
                     dataKey="id"
                     :rowHover="true"
                     v-model:filters="filters1"
@@ -116,16 +116,16 @@ const calculateCustomerTotal = (name) => {
                 >
                     <template #header>
                         <div class="flex justify-content-between flex-column sm:flex-row">
-                            <Button type="button" icon="pi pi-filter-slash" label="Clear" class="p-button-outlined mb-2" @click="clearFilter1()" />
+                            <Button type="button" icon="pi pi-filter-slash" label="Очистить" class="p-button-outlined mb-2" @click="clearFilter1()" />
                             <span class="p-input-icon-left mb-2">
                                 <i class="pi pi-search" />
-                                <InputText v-model="filters1['global'].value" placeholder="Keyword Search" style="width: 100%" />
+                                <InputText v-model="filters1['global'].value" placeholder="Поиск" style="width: 100%" />
                             </span>
                         </div>
                     </template>
                     <template #empty> No customers found. </template>
                     <template #loading> Loading customers data. Please wait. </template>
-                    <Column field="name" header="Name" style="min-width: 12rem">
+                    <Column field="name" header="ФИО" style="min-width: 12rem">
                         <template #body="{ data }">
                             {{ data.name }}
                         </template>
@@ -133,7 +133,7 @@ const calculateCustomerTotal = (name) => {
                             <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by name" />
                         </template>
                     </Column>
-                    <Column header="Country" filterField="country.name" style="min-width: 12rem">
+                    <Column header="Гражданство" filterField="country.name" style="min-width: 12rem">
                         <template #body="{ data }">
                             <img src="/demo/images/flag/flag_placeholder.png" :alt="data.country.name" :class="'flag flag-' + data.country.code" width="30" />
                             <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.country.name }}</span>
@@ -148,7 +148,7 @@ const calculateCustomerTotal = (name) => {
                             <Button type="button" icon="pi pi-check" @click="filterCallback()" class="p-button-success"></Button>
                         </template>
                     </Column>
-                    <Column header="Agent" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="min-width: 14rem">
+                    <Column header="Агент" filterField="representative" :showFilterMatchModes="false" :filterMenuStyle="{ width: '14rem' }" style="min-width: 14rem">
                         <template #body="{ data }">
                             <img :alt="data.representative.name" :src="contextPath + 'demo/images/avatar/' + data.representative.image" width="32" style="vertical-align: middle" />
                             <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.representative.name }}</span>
@@ -165,7 +165,7 @@ const calculateCustomerTotal = (name) => {
                             </MultiSelect>
                         </template>
                     </Column>
-                    <Column header="Date" filterField="date" dataType="date" style="min-width: 10rem">
+                    <Column header="Дата" filterField="date" dataType="date" style="min-width: 10rem">
                         <template #body="{ data }">
                             {{ formatDate(data.date) }}
                         </template>
@@ -173,15 +173,15 @@ const calculateCustomerTotal = (name) => {
                             <Calendar v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" />
                         </template>
                     </Column>
-                    <Column header="Balance" filterField="balance" dataType="numeric" style="min-width: 10rem">
+                    <Column header="Баланс" filterField="balance" dataType="numeric" style="min-width: 10rem">
                         <template #body="{ data }">
                             {{ formatCurrency(data.balance) }}
                         </template>
                         <template #filter="{ filterModel }">
-                            <InputNumber v-model="filterModel.value" mode="currency" currency="USD" locale="en-US" />
+                            <InputNumber v-model="filterModel.value" mode="currency" currency="RUB" locale="ru-RU" />
                         </template>
                     </Column>
-                    <Column field="status" header="Status" :filterMenuStyle="{ width: '14rem' }" style="min-width: 12rem">
+                    <Column field="status" header="Статус" :filterMenuStyle="{ width: '14rem' }" style="min-width: 12rem">
                         <template #body="{ data }">
                             <span :class="'customer-badge status-' + data.status">{{ data.status }}</span>
                         </template>
@@ -197,7 +197,7 @@ const calculateCustomerTotal = (name) => {
                             </Dropdown>
                         </template>
                     </Column>
-                    <Column field="activity" header="Activity" :showFilterMatchModes="false" style="min-width: 12rem">
+                    <Column field="activity" header="Прогресс" :showFilterMatchModes="false" style="min-width: 12rem">
                         <template #body="{ data }">
                             <ProgressBar :value="data.activity" :showValue="false" style="height: 0.5rem"></ProgressBar>
                         </template>
@@ -209,7 +209,7 @@ const calculateCustomerTotal = (name) => {
                             </div>
                         </template>
                     </Column>
-                    <Column field="verified" header="Verified" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
+                    <Column field="verified" header="Проверено" dataType="boolean" bodyClass="text-center" style="min-width: 8rem">
                         <template #body="{ data }">
                             <i class="pi" :class="{ 'text-green-500 pi-check-circle': data.verified, 'text-pink-500 pi-times-circle': !data.verified }"></i>
                         </template>
@@ -221,7 +221,7 @@ const calculateCustomerTotal = (name) => {
             </div>
         </div>
 
-        <div class="col-12">
+        <!-- <div class="col-12">
             <div class="card">
                 <h5>Frozen Columns</h5>
                 <ToggleButton v-model="idFrozen" onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Id" offLabel="Freeze Id" style="width: 10rem" />
@@ -256,9 +256,9 @@ const calculateCustomerTotal = (name) => {
                     </Column>
                 </DataTable>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-12">
+        <!-- <div class="col-12">
             <div class="card">
                 <h5>Row Expand</h5>
                 <DataTable :value="products" v-model:expandedRows="expandedRows" dataKey="id" responsiveLayout="scroll">
@@ -338,9 +338,9 @@ const calculateCustomerTotal = (name) => {
                     </template>
                 </DataTable>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-12">
+        <!-- <div class="col-12">
             <div class="card">
                 <h5>Subheader Grouping</h5>
                 <DataTable :value="customer3" rowGroupMode="subheader" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1" scrollable scrollHeight="400px">
@@ -368,7 +368,7 @@ const calculateCustomerTotal = (name) => {
                     </template>
                 </DataTable>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

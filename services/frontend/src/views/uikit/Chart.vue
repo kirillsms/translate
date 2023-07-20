@@ -29,16 +29,16 @@ const setColorOptions = () => {
 
 const setChart = () => {
     barData.value = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
         datasets: [
             {
-                label: 'My First dataset',
+                label: 'Возвраты',
                 backgroundColor: documentStyle.getPropertyValue('--primary-500'),
                 borderColor: documentStyle.getPropertyValue('--primary-500'),
                 data: [65, 59, 80, 81, 56, 55, 40]
             },
             {
-                label: 'My Second dataset',
+                label: 'Переводы',
                 backgroundColor: documentStyle.getPropertyValue('--primary-200'),
                 borderColor: documentStyle.getPropertyValue('--primary-200'),
                 data: [28, 48, 40, 19, 86, 27, 90]
@@ -79,7 +79,7 @@ const setChart = () => {
     };
 
     pieData.value = {
-        labels: ['A', 'B', 'C'],
+        labels: ['Узбеки', 'Таджики', 'Киргизы'],
         datasets: [
             {
                 data: [540, 325, 702],
@@ -101,10 +101,10 @@ const setChart = () => {
     };
 
     lineData.value = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
         datasets: [
             {
-                label: 'First Dataset',
+                label: 'Возвраты',
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
                 backgroundColor: documentStyle.getPropertyValue('--primary-500'),
@@ -112,7 +112,7 @@ const setChart = () => {
                 tension: 0.4
             },
             {
-                label: 'Second Dataset',
+                label: 'Переводы',
                 data: [28, 48, 40, 19, 86, 27, 90],
                 fill: false,
                 backgroundColor: documentStyle.getPropertyValue('--primary-200'),
@@ -160,7 +160,7 @@ const setChart = () => {
                 label: 'My dataset'
             }
         ],
-        labels: ['Indigo', 'Purple', 'Teal', 'Orange']
+        labels: ['Таджикский', 'Узбекский', 'Китайский', 'Киргизский']
     };
 
     polarOptions.value = {
@@ -181,10 +181,10 @@ const setChart = () => {
     };
 
     radarData.value = {
-        labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+        labels: ['Мигучёт', 'РВП', 'ВНЖ', 'Гражданство', 'Уведомления', 'Визы', 'Патенты'],
         datasets: [
             {
-                label: 'My First dataset',
+                label: 'Узбекский',
                 borderColor: documentStyle.getPropertyValue('--indigo-400'),
                 pointBackgroundColor: documentStyle.getPropertyValue('--indigo-400'),
                 pointBorderColor: documentStyle.getPropertyValue('--indigo-400'),
@@ -193,7 +193,7 @@ const setChart = () => {
                 data: [65, 59, 90, 81, 56, 55, 40]
             },
             {
-                label: 'My Second dataset',
+                label: 'Таджикский',
                 borderColor: documentStyle.getPropertyValue('--purple-400'),
                 pointBackgroundColor: documentStyle.getPropertyValue('--purple-400'),
                 pointBorderColor: documentStyle.getPropertyValue('--purple-400'),
@@ -236,37 +236,37 @@ watch(
     <div class="grid p-fluid">
         <div class="col-12 xl:col-6">
             <div class="card">
-                <h5>Linear Chart</h5>
+                <h5>Статистика линейная</h5>
                 <Chart type="line" :data="lineData" :options="lineOptions"></Chart>
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card">
-                <h5>Bar Chart</h5>
+                <h5>Статистика гистограмма</h5>
                 <Chart type="bar" :data="barData" :options="barOptions"></Chart>
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card flex flex-column align-items-center">
-                <h5 class="text-left w-full">Pie Chart</h5>
+                <h5 class="text-left w-full">Круговая диаграмма</h5>
                 <Chart type="pie" :data="pieData" :options="pieOptions"></Chart>
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card flex flex-column align-items-center">
-                <h5 class="text-left w-full">Doughnut Chart</h5>
+                <h5 class="text-left w-full">Пончиковая диаграмма</h5>
                 <Chart type="doughnut" :data="pieData" :options="pieOptions"></Chart>
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card flex flex-column align-items-center">
-                <h5 class="text-left w-full">Polar Area Chart</h5>
+                <h5 class="text-left w-full">Карта полярной области</h5>
                 <Chart type="polarArea" :data="polarData" :options="polarOptions"></Chart>
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card flex flex-column align-items-center">
-                <h5 class="text-left w-full">Radar Chart</h5>
+                <h5 class="text-left w-full">Радар диаграмма</h5>
                 <Chart type="radar" :data="radarData" :options="radarOptions"></Chart>
             </div>
         </div>

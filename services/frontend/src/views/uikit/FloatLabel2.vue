@@ -188,6 +188,16 @@ function imageOCR() {
 }
 </script>
 
+<script>
+import pdf from 'vue-pdf'
+
+export default {
+  components: {
+    pdf
+  }
+}
+</script>
+
 <template>
     <!-- <div class="card">
         <h5>Float Label</h5>
@@ -286,6 +296,9 @@ function imageOCR() {
                     <Image :src="myimage" alt="Image" width="250" preview />
                 </div>
             </div>
+        <!-- <div>
+            <pdf src="https://725920.selcdn.ru/upload_portkkm/iblock/618/618ced6fb507bce46330be90b2f799a6/PC_100-Instruktsiya-polzovatelya.pdf"></pdf>
+        </div> -->
         </div>
         <div class="col-12 lg:col-12 xl:col-6">
             <div class="card">
